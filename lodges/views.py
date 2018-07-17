@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 # Create your views here.
 def login(request):
     return render(request, 'login.html')
 
 def signup(request):
-    return HttpResponse("I am a sign up page.")
+    return render(request, 'signup.html')
+
+def dashboard(request):
+    return render(request, 'signup.html')

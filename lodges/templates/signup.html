@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Sign Up{% endblock %}
+{% block body %}
+  <center>
+    <div class="container">
+      <input placeholder="Full name" class="user">
+      <input placeholder="User name" class="password">
+      <input placeholder="Email address" class="password">
+      <input placeholder="Gender" class="password">
+      <input placeholder="Phone Number" class="password">
+      <select name="study" class="password">
+        <option>Undergraduate</option>
+        <option>Post Graduate</option>
+        <option>Other</option>
+      </select>
+      <input placeholder="Next of kin" class="password">
+      <input placeholder="Next of kin phone number" class="password">
+      <input placeholder="Faculty" class="password">
+      <input placeholder="Department" class="password">
+      <input placeholder="Level" class="password">
+      <textarea class="password" placeholder="A little about yourself"></textarea>
+      <input placeholder="password" class="password">
+      <button class="submit">Submit</button>
+    </div>
+  </center>
+{% endblock %}
