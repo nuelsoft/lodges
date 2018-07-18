@@ -3,9 +3,12 @@
 {% block body %}
   <center>
     <div class="container">
-      <input placeholder="Username" class="user">
-      <input placeholder="password" class="password">
-      <button class="submit">Submit</button>
+      <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+        <input placeholder="Username" class="user" name="username">
+        <input placeholder="password" class="password" name="password">
+        <button class="submit">Submit</button>
+      </form>
     </div>
   </center>
 {% endblock %}

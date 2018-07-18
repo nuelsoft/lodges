@@ -3,24 +3,27 @@
 {% block body %}
   <center>
     <div class="container">
-      <input placeholder="Full name" class="user">
-      <input placeholder="User name" class="password">
-      <input placeholder="Email address" class="password">
-      <input placeholder="Gender" class="password">
-      <input placeholder="Phone Number" class="password">
-      <select name="study" class="password">
-        <option>Undergraduate</option>
-        <option>Post Graduate</option>
-        <option>Other</option>
-      </select>
-      <input placeholder="Next of kin" class="password">
-      <input placeholder="Next of kin phone number" class="password">
-      <input placeholder="Faculty" class="password">
-      <input placeholder="Department" class="password">
-      <input placeholder="Level" class="password">
-      <textarea class="password" placeholder="A little about yourself"></textarea>
-      <input placeholder="password" class="password">
-      <button class="submit">Submit</button>
+      <form action="{% url 'signup' %}" method="post">
+        {% csrf_token %}
+        <input placeholder="Full name" class="user" name="name">
+        <input placeholder="User name" class="password" name="username">
+        <input placeholder="Email address" class="password" name="email">
+        <input placeholder="Gender" class="password" name="gender">
+        <input placeholder="Phone Number" class="password" name="phone">
+        <select name="study" class="password" name="study">
+          <option>Undergraduate</option>
+          <option>Post Graduate</option>
+          <option>Other</option>
+        </select>
+        <input placeholder="Next of kin" class="password" name="kin">
+        <input placeholder="Next of kin phone number" class="password" name="kin_phone">
+        <input placeholder="Faculty" class="password" name="faculty">
+        <input placeholder="Department" class="password" name="department">
+        <input placeholder="Level" class="password" name="level">
+        <textarea class="password" placeholder="A little about yourself" name="description"></textarea>
+        <input placeholder="password" class="password" name="password">
+        <button class="submit">Submit</button>
+      </form>
     </div>
   </center>
 {% endblock %}

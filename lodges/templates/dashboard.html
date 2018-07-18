@@ -1,5 +1,24 @@
 {% extends 'base.html' %}
 {% block title %}X - Dashboard{% endblock %}
 {% block body %}
-  
+<style>
+  header{
+    width: 100%;
+    color: #fff;
+    font-size: 25px;
+    background: #505457;
+    padding: 15px;
+  }
+</style>
+<header>Welcome {{p.full_name}}</header>
+    <div class="vertical-nav">
+
+    </div>
+    <div class="main-content">
+      <ul>
+        {% for i in zones %}
+        <li><a href="{% url 'zone' i.name %}">{{i}}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
 {% endblock %}
