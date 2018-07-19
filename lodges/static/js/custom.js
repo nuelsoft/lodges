@@ -7,11 +7,11 @@
 1. Vars and Inits
 2. Set Header
 3. Init Home Slider
-4. Init Search Features
-5. Init Menu
-6. Initialize Testimonials Slider
-7. Initialize Parallax
-8. Init Cities Slider
+4. Init Menu
+5. Init Search
+6. Init CTA Slider
+7. Init Testimonials Slider
+8. Init Search Form
 
 
 ******************************/
@@ -26,9 +26,10 @@ $(document).ready(function()
 
 	*/
 
+	var menu = $('.menu');
 	var menuActive = false;
 	var header = $('.header');
-	var ctrl = new ScrollMagic.Controller();
+	var searchActive = false;
 
 	setHeader();
 
@@ -43,11 +44,11 @@ $(document).ready(function()
 	});
 
 	initHomeSlider();
-	initSearchFeatures();
 	initMenu();
-	initTestimonialsSlider();
-	initParallax();
-	initCitiesSlider();
+	initSearch();
+	initCtaSlider();
+	initTestSlider();
+	initSearchForm();
 
 	/* 
 
@@ -85,7 +86,6 @@ $(document).ready(function()
 		}
 	}
 
-
 	/* 
 
 	3. Init Home Slider
@@ -100,25 +100,51 @@ $(document).ready(function()
 
 			homeSlider.owlCarousel(
 			{
-				items: 1,
-				loop: true,
-				smartSpeed: 1200,
-				autoplay:true,
-				nav:false,
-				dots:false
+				items:1,
+				loop:true,
+				autoplay:false,
+				smartSpeed:1200,
+				dotsContainer:'main_slider_custom_dots'
 			});
 
-			// Handle Home Slider Navigation
-
-			if($('.home_slider_nav_left').length)
+			/* Custom nav events */
+			if($('.home_slider_prev').length)
 			{
-				var navLeft = $('.home_slider_nav_left');
+				var prev = $('.home_slider_prev');
 
-				navLeft.on('click', function()
+				prev.on('click', function()
 				{
 					homeSlider.trigger('prev.owl.carousel');
 				});
 			}
+
+			if($('.home_slider_next').length)
+			{
+				var next = $('.home_slider_next');
+
+				next.on('click', function()
+				{
+					homeSlider.trigger('next.owl.carousel');
+				});
+			}
+
+			/* Custom dots events */
+			if($('.home_slider_custom_dot').length)
+			{
+				$('.home_slider_custom_dot').on('click', function()
+				{
+					$('.home_slider_custom_dot').removeClass('active');
+					$(this).addClass('active');
+					homeSlider.trigger('to.owl.carousel', [$(this).index(), 300]);
+				});
+			}
+
+			/* Change active class for dots when slide changes by nav or touch */
+			homeSlider.on('changed.owl.carousel', function(event)
+			{
+				$('.home_slider_custom_dot').removeClass('active');
+				$('.home_slider_custom_dots li').eq(event.page.index).addClass('active');
+			});	
 
 			// add animate.css class(es) to the elements to be animated
 			function setAnimation ( _elem, _InOut )
@@ -142,7 +168,7 @@ $(document).ready(function()
 			// Fired before current slide change
 			homeSlider.on('change.owl.carousel', function(event)
 			{
-				var $currentItem = $('.home_slider_content', homeSlider).eq(event.item.index);
+				var $currentItem = $('.home_slider_item', homeSlider).eq(event.item.index);
 				var $elemsToanim = $currentItem.find("[data-animation-out]");
 				setAnimation ($elemsToanim, 'out');
 			});
@@ -150,243 +176,227 @@ $(document).ready(function()
 			// Fired after current slide has been changed
 			homeSlider.on('changed.owl.carousel', function(event)
 			{
-				var $currentItem = $('.home_slider_content', homeSlider).eq(event.item.index);
+				var $currentItem = $('.home_slider_item', homeSlider).eq(event.item.index);
 				var $elemsToanim = $currentItem.find("[data-animation-in]");
 				setAnimation ($elemsToanim, 'in');
 			})
 		}
 	}
-	
-	/* 
-
-	4. Init Search Features
-
-	*/
-
-	function initSearchFeatures()
-	{
-		if($('.search_features').length)
-		{
-			var triggerEle = $('.search_features_trigger');
-			var ele = $('.search_features');
-
-			triggerEle.on('click', function(e)
-			{
-				e.preventDefault();
-				triggerEle.toggleClass('active');
-				ele.toggleClass('active');
-
-				var panel = ele;
-				var panelH = ele.prop('scrollHeight') + "px";
-				
-				if(panel.css('max-height') == "0px")
-				{
-					panel.css('max-height', panel.prop('scrollHeight') + "px");
-				}
-				else
-				{
-					panel.css('max-height', "0px");
-				} 
-			});
-		}
-	}
 
 	/* 
 
-	5. Init Menu
+	4. Init Menu
 
 	*/
 
 	function initMenu()
 	{
-		if($('.menu').length)
+		if($('.hamburger').length && $('.menu').length)
 		{
-			var menu = $('.menu');
 			var hamb = $('.hamburger');
+			var close = $('.menu_close_container');
 
 			hamb.on('click', function()
 			{
-				if(menuActive)
+				if(!menuActive)
 				{
-					closeMenu();
+					openMenu();
 				}
 				else
 				{
-					openMenu();
-
-					$(document).one('click', function cls(e)
-					{
-						if($(e.target).hasClass('menu_mm'))
-						{
-							$(document).one('click', cls);
-						}
-						else
-						{
-							closeMenu();
-						}
-					});
+					closeMenu();
 				}
 			});
-		}
-	}
 
-	function closeMenu()
-	{
-		var menu = $('.menu');
-		menu.removeClass('active');
-		menuActive = false;
-		menu.css('max-height', "0px");
+			close.on('click', function()
+			{
+				if(!menuActive)
+				{
+					openMenu();
+				}
+				else
+				{
+					closeMenu();
+				}
+			});
+
+	
+		}
 	}
 
 	function openMenu()
 	{
-		var menu = $('.menu');
 		menu.addClass('active');
 		menuActive = true;
-		menu.css('max-height', menu.prop('scrollHeight') + "px");
+	}
+
+	function closeMenu()
+	{
+		menu.removeClass('active');
+		menuActive = false;
 	}
 
 	/* 
 
-	6. Initialize Testimonials Slider
+	5. Init Search
 
 	*/
 
-	function initTestimonialsSlider()
+	function initSearch()
 	{
-		if($('.testimonials_slider').length)
+		if($('.search_tab').length)
 		{
-			var owl1 = $('.testimonials_slider');
+			$('.search_tab').on('click', function()
+			{
+				$('.search_tab').removeClass('active');
+				$(this).addClass('active');
+				var clickedIndex = $('.search_tab').index(this);
 
-			owl1.owlCarousel(
+				var panels = $('.search_panel');
+				panels.removeClass('active');
+				$(panels[clickedIndex]).addClass('active');
+			});
+		}
+	}
+
+	/* 
+
+	6. Init CTA Slider
+
+	*/
+
+	function initCtaSlider()
+	{
+		if($('.cta_slider').length)
+		{
+			var ctaSlider = $('.cta_slider');
+
+			ctaSlider.owlCarousel(
 			{
 				items:1,
 				loop:true,
-				nav:false,
-				autoplay:true,
-				autoplayTimeout:5000,
-				smartSpeed:1000
-			});
-		}
-	}
-
-	/* 
-
-	7. Initialize Parallax
-
-	*/
-
-	function initParallax()
-	{
-		// Add parallax effect to home slider
-		if($('.slider_prlx').length)
-		{
-			var homeBcg = $('.slider_prlx');
-
-			var homeBcgScene = new ScrollMagic.Scene({
-		        triggerElement: homeBcg,
-		        triggerHook: 1,
-		        duration: "100%"
-		    })
-		    .setTween(TweenMax.to(homeBcg, 1, {y: '15%', ease:Power0.easeNone}))
-		    .addTo(ctrl);
-		}
-
-		// Add parallax effect to every element with class prlx
-		// Add class prlx_parent to the parent of the element
-		if($('.prlx_parent').length && $('.prlx').length)
-		{
-			var elements = $('.prlx_parent');
-
-			elements.each(function()
-			{
-				var ele = this;
-				var bcg = $(ele).find('.prlx');
-
-				var slideParallaxScene = new ScrollMagic.Scene({
-			        triggerElement: ele,
-			        triggerHook: 1,
-			        duration: "200%"
-			    })
-			    .setTween(TweenMax.from(bcg, 1, {y: '-30%', ease:Power0.easeNone}))
-			    .addTo(ctrl);
-			});
-		}
-	}
-
-	/* 
-
-	8. Init Cities Slider
-
-	*/
-
-	function initCitiesSlider()
-	{
-		if($('.cities_slider').length)
-		{
-			var citiesSlider = $('.cities_slider');
-
-			citiesSlider.owlCarousel(
-			{
-				loop:true,
-				autoplay:true,
-				margin:30,
+				autoplay:false,
 				nav:false,
 				dots:false,
+				smartSpeed:1200
+			});
+
+			/* Custom nav events */
+			if($('.cta_slider_prev').length)
+			{
+				var prev = $('.cta_slider_prev');
+
+				prev.on('click', function()
+				{
+					ctaSlider.trigger('prev.owl.carousel');
+				});
+			}
+
+			if($('.cta_slider_next').length)
+			{
+				var next = $('.cta_slider_next');
+
+				next.on('click', function()
+				{
+					ctaSlider.trigger('next.owl.carousel');
+				});
+			}
+		}
+	}
+
+	/* 
+
+	7. Init Testimonials Slider
+
+	*/
+
+	function initTestSlider()
+	{
+		if($('.test_slider').length)
+		{
+			var testSlider = $('.test_slider');
+
+			testSlider.owlCarousel(
+			{
+				loop:true,
+				nav:false,
+				dots:false,
+				smartSpeed:1200,
+				margin:30,
 				responsive:
 				{
-					0:
-					{
-						items:1
-					},
-					320:
-					{
-						items:1
-					},
-					480:
-					{
-						items:2
-					},
-					575:
-					{
-						items:2
-					},
-					767:
-					{
-						items:3
-					},
-					991:
-					{
-						items:4
-					},
-					1280:
-					{
-						items:5
-					},
-					1440:
-					{
-						items:6
-					}
+					0:{items:1},
+					480:{items:1},
+					768:{items:2},
+					992:{items:3}
 				}
 			});
 
-			if($('.cities_prev'))
+			/* Custom nav events */
+			if($('.test_slider_prev').length)
 			{
-				var citiesPrev = $('.cities_prev');
-				citiesPrev.on('click', function()
+				var prev = $('.test_slider_prev');
+
+				prev.on('click', function()
 				{
-					citiesSlider.trigger('prev.owl.carousel');
+					testSlider.trigger('prev.owl.carousel');
 				});
 			}
 
-			if($('.cities_next'))
+			if($('.test_slider_next').length)
 			{
-				var citiesNext = $('.cities_next');
-				citiesNext.on('click', function()
+				var next = $('.test_slider_next');
+
+				next.on('click', function()
 				{
-					citiesSlider.trigger('next.owl.carousel');
+					testSlider.trigger('next.owl.carousel');
 				});
 			}
+		}
+	}
+
+	/* 
+
+	8. Init Search Form
+
+	*/
+
+	function initSearchForm()
+	{
+		if($('.search_form').length)
+		{
+			var searchForm = $('.search_form');
+			var searchInput = $('.search_content_input');
+			var searchButton = $('.content_search');
+
+			searchButton.on('click', function(event)
+			{
+				event.stopPropagation();
+
+				if(!searchActive)
+				{
+					searchForm.addClass('active');
+					searchActive = true;
+
+					$(document).one('click', function closeForm(e)
+					{
+						if($(e.target).hasClass('search_content_input'))
+						{
+							$(document).one('click', closeForm);
+						}
+						else
+						{
+							searchForm.removeClass('active');
+							searchActive = false;
+						}
+					});
+				}
+				else
+				{
+					searchForm.removeClass('active');
+					searchActive = false;
+				}
+			});	
 		}
 	}
 });

@@ -9,8 +9,9 @@
 3. Init Menu
 4. Init Progress Bars
 5. Init Accordions
-6. Init Loaders
-7. Initialize Milestones
+6. Initialize Milestones
+7. Init Loaders
+8. Init Search Form
 
 
 ******************************/
@@ -25,9 +26,11 @@ $(document).ready(function()
 
 	*/
 
+	var menu = $('.menu');
 	var menuActive = false;
 	var header = $('.header');
 	var ctrl = new ScrollMagic.Controller();
+	var searchActive = false;
 
 	setHeader();
 
@@ -44,8 +47,9 @@ $(document).ready(function()
 	initMenu();
 	initProgressBars();
 	initAccordions();
-	initLoaders();
 	initMilestones();
+	initLoaders();
+	initSearchForm();
 
 	/* 
 
@@ -91,51 +95,47 @@ $(document).ready(function()
 
 	function initMenu()
 	{
-		if($('.menu').length)
+		if($('.hamburger').length && $('.menu').length)
 		{
-			var menu = $('.menu');
 			var hamb = $('.hamburger');
+			var close = $('.menu_close_container');
 
 			hamb.on('click', function()
 			{
-				if(menuActive)
+				if(!menuActive)
 				{
-					closeMenu();
+					openMenu();
 				}
 				else
 				{
-					openMenu();
+					closeMenu();
+				}
+			});
 
-					$(document).one('click', function cls(e)
-					{
-						if($(e.target).hasClass('menu_mm'))
-						{
-							$(document).one('click', cls);
-						}
-						else
-						{
-							closeMenu();
-						}
-					});
+			close.on('click', function()
+			{
+				if(!menuActive)
+				{
+					openMenu();
+				}
+				else
+				{
+					closeMenu();
 				}
 			});
 		}
 	}
 
-	function closeMenu()
-	{
-		var menu = $('.menu');
-		menu.removeClass('active');
-		menuActive = false;
-		menu.css('max-height', "0px");
-	}
-
 	function openMenu()
 	{
-		var menu = $('.menu');
 		menu.addClass('active');
 		menuActive = true;
-		menu.css('max-height', menu.prop('scrollHeight') + "px");
+	}
+
+	function closeMenu()
+	{
+		menu.removeClass('active');
+		menuActive = false;
 	}
 
 	/* 
@@ -155,7 +155,11 @@ $(document).ready(function()
 				var ele = $(this);
 	    		var elePerc = ele.data('perc');
 	    		var eleName = '#' + ele.attr('id');
-
+	    		var color = "#fa9e1b";
+	    		if(ele.attr('data-color'))
+	    		{
+	    			color = ele.attr('data-color');
+	    		}
 	    		var statsScene = new ScrollMagic.Scene({
 		    		triggerElement: this,
 		    		triggerHook: 'onEnter',
@@ -165,38 +169,33 @@ $(document).ready(function()
 		    	{
 		    		var pbar = new ProgressBar.Line(eleName, 
 		    		{
-		    			strokeWidth: 0.5,
+		    			strokeWidth: 1,
 						easing: 'easeInOut',
 						duration: 1400,
-						color: '#fd784f',
-						trailColor: '#e3e3e3',
+						color: color,
+						trailColor: '#e1e1e1',
 						trailWidth: 1,
 						svgStyle: {display: 'block', width: '100%', height: '100%'},
 						text: {
 							style: {
 								// Text color.
 								// Default: same as stroke color (options.color)
-								fontFamily: 'Montserrat',
-								textAlign: 'center',
+								fontFamily: 'Open Sans',
+								textAlign: 'right',
 								fontSize: '14px',
-								fontWeight: '500',
-								lineHeight: '32px',
-								width: '60px',
-								color: '#ffffff',
-								background: '#fd784f',
+								width: '40px',
+								color: '#1a1a1a',
 								position: 'absolute',
-								left: 'calc' + '(' + (elePerc * 100) + '% - 60px' + ')',
-								top: '8px',
+								left: 'calc' + '(' + (elePerc * 100) + '% - 40px' + ')',
+								top: '-39px',
 								padding: 0,
 								margin: 0,
 								transform: null
 								},
 								autoStyleContainer: false
 						},
-						from: {color: '#00bcd5'},
-						to: {color: '#00bcd5'},
 						step: function(state, bar) {
-						bar.setText(Math.round(bar.value() * 100) + ' %');
+						bar.setText('+' + Math.round(bar.value() * 100) + ' %');
 						}
 		    		});
 		    		pbar.animate(elePerc);
@@ -276,76 +275,7 @@ $(document).ready(function()
 
 	/* 
 
-	6. Init Loaders
-
-	*/
-
-	function initLoaders()
-	{
-		if($('.loader').length)
-		{
-			var loaders = $('.loader');
-
-			loaders.each(function()
-			{
-				var loader = this;
-				var endValue = $(loader).data('perc');
-
-				var loaderScene = new ScrollMagic.Scene({
-		    		triggerElement: this,
-		    		triggerHook: 'onEnter',
-		    		reverse:false
-		    	})
-		    	.on('start', function()
-		    	{
-		    		var bar = new ProgressBar.Circle(loader,
-					{
-						color: '#aaa',
-						// This has to be the same size as the maximum width to
-						// prevent clipping
-						strokeWidth: 4,
-						trailWidth: 0,
-						easing: 'easeInOut',
-						duration: 1400,
-						text:
-						{
-							autoStyleContainer: false
-						},
-						from:{ color: '#fd784f', width: 3 },
-						to: { color: '#fd784f', width: 3 },
-						// Set default step function for all animate calls
-						step: function(state, circle)
-						{
-							circle.path.setAttribute('stroke', state.color);
-							circle.path.setAttribute('stroke-width', state.width);
-
-							var value = Math.round(circle.value() * 100);
-							if (value === 0)
-							{
-								circle.setText('0%');
-							}
-							else
-							{
-								circle.setText(value + "%");
-							}
-						}
-					});
-					bar.text.style.fontFamily = '"Open Sans", sans-serif';
-					bar.text.style.fontSize = '40px';
-					bar.text.style.fontWeight = '600';
-					bar.text.style.color = "#07122c";
-
-
-					bar.animate(endValue);  // Number from 0.0 to 1.0
-		    	})
-			    .addTo(ctrl);
-			});
-		}
-	}
-
-	/* 
-
-	7. Initialize Milestones
+	6. Initialize Milestones
 
 	*/
 
@@ -397,6 +327,91 @@ $(document).ready(function()
 		    	})
 			    .addTo(ctrl);
 	    	});
+		}
+	}
+
+	/* 
+
+	7. Init Loaders
+
+	*/
+
+	function initLoaders()
+	{
+		if($('.loader').length)
+		{
+			var loaders = $('.circle');
+
+			loaders.each(function()
+			{
+				var loader = $(this);
+				var endValue = $(loader).data('perc');
+
+				var loaderScene = new ScrollMagic.Scene({
+		    		triggerElement: this,
+		    		triggerHook: 'onEnter',
+		    		reverse:false
+		    	})
+		    	.on('start', function()
+		    	{
+		    		loader.circleProgress({
+						startAngle: 4.66,
+						thickness: 3,
+						size: 176,
+						emptyFill:"transparent",
+						fill: {gradient:["#fa9e1b", "#8d4fff"]},
+					}).on('circle-animation-progress', function(event, progress, stepValue)
+						{
+							$(this).find('strong').text(Math.round(stepValue * 100) + "%");
+						});
+		    	})
+			    .addTo(ctrl);
+			});
+		}
+	}
+
+	/* 
+
+	8. Init Search Form
+
+	*/
+
+	function initSearchForm()
+	{
+		if($('.search_form').length)
+		{
+			var searchForm = $('.search_form');
+			var searchInput = $('.search_content_input');
+			var searchButton = $('.content_search');
+
+			searchButton.on('click', function(event)
+			{
+				event.stopPropagation();
+
+				if(!searchActive)
+				{
+					searchForm.addClass('active');
+					searchActive = true;
+
+					$(document).one('click', function closeForm(e)
+					{
+						if($(e.target).hasClass('search_content_input'))
+						{
+							$(document).one('click', closeForm);
+						}
+						else
+						{
+							searchForm.removeClass('active');
+							searchActive = false;
+						}
+					});
+				}
+				else
+				{
+					searchForm.removeClass('active');
+					searchActive = false;
+				}
+			});	
 		}
 	}
 });

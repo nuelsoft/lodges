@@ -8,6 +8,7 @@
 2. Set Header
 3. Init Menu
 4. Init Google Map
+5. Init Search Form
 
 
 ******************************/
@@ -22,9 +23,11 @@ $(document).ready(function()
 
 	*/
 
+	var menu = $('.menu');
 	var menuActive = false;
 	var header = $('.header');
 	var map;
+	var searchActive = false;
 
 	setHeader();
 
@@ -40,6 +43,7 @@ $(document).ready(function()
 
 	initMenu();
 	initGoogleMap();
+	initSearchForm();
 
 	/* 
 
@@ -85,51 +89,47 @@ $(document).ready(function()
 
 	function initMenu()
 	{
-		if($('.menu').length)
+		if($('.hamburger').length && $('.menu').length)
 		{
-			var menu = $('.menu');
 			var hamb = $('.hamburger');
+			var close = $('.menu_close_container');
 
 			hamb.on('click', function()
 			{
-				if(menuActive)
+				if(!menuActive)
 				{
-					closeMenu();
+					openMenu();
 				}
 				else
 				{
-					openMenu();
+					closeMenu();
+				}
+			});
 
-					$(document).one('click', function cls(e)
-					{
-						if($(e.target).hasClass('menu_mm'))
-						{
-							$(document).one('click', cls);
-						}
-						else
-						{
-							closeMenu();
-						}
-					});
+			close.on('click', function()
+			{
+				if(!menuActive)
+				{
+					openMenu();
+				}
+				else
+				{
+					closeMenu();
 				}
 			});
 		}
 	}
 
-	function closeMenu()
-	{
-		var menu = $('.menu');
-		menu.removeClass('active');
-		menuActive = false;
-		menu.css('max-height', "0px");
-	}
-
 	function openMenu()
 	{
-		var menu = $('.menu');
 		menu.addClass('active');
 		menuActive = true;
-		menu.css('max-height', menu.prop('scrollHeight') + "px");
+	}
+
+	function closeMenu()
+	{
+		menu.removeClass('active');
+		menuActive = false;
 	}
 
 	/* 
@@ -140,7 +140,7 @@ $(document).ready(function()
 
 	function initGoogleMap()
 	{
-		var myLatlng = new google.maps.LatLng(36.131433, -5.353998);
+		var myLatlng = new google.maps.LatLng(36.132229, -5.351153);
     	var mapOptions = 
     	{
     		center: myLatlng,
@@ -163,41 +163,7 @@ $(document).ready(function()
 
     	// Initialize a map with options
     	map = new google.maps.Map(document.getElementById('map'), mapOptions);
-    	
-
-    	// Use an image for a marker
-		// var image = 'images/map_marker.png';
-		var image = 
-		{
-			url:'images/map_marker.png',
-			size: new google.maps.Size(201, 195),
-			anchor: new google.maps.Point(0, 166) //setting the anchor for larger icons
-		};
-
-		var imageSmall =
-		{
-			url:'images/map_marker_small.png',
-			size: new google.maps.Size(80, 78),
-			anchor: new google.maps.Point(0, 66) //setting the anchor for larger icons
-		};
-
-		var marker = new google.maps.Marker(
-		{
-			position: new google.maps.LatLng(36.131433, -5.353998),
-			map: map
-		});
-
-		if($(window).width() < 720)
-    	{
-    		map.panBy(100, 0);
-    		marker.setIcon(imageSmall);
-    	}
-    	else
-    	{
-    		map.panBy(250, 0);
-    		marker.setIcon(image);
-    	}
-
+   
 		// Re-center map after window resize
 		google.maps.event.addDomListener(window, 'resize', function()
 		{
@@ -205,17 +171,52 @@ $(document).ready(function()
 			{
 				google.maps.event.trigger(map, "resize");
 				map.setCenter(myLatlng);
-				if($(window).width() < 720)
-		    	{
-		    		map.panBy(100, 0);
-		    		marker.setIcon(imageSmall);
-		    	}
-		    	else
-		    	{
-		    		map.panBy(250, 0);
-		    		marker.setIcon(image);
-		    	}
 			}, 1400);
 		});
+	}
+
+	/* 
+
+	8. Init Search Form
+
+	*/
+
+	function initSearchForm()
+	{
+		if($('.search_form').length)
+		{
+			var searchForm = $('.search_form');
+			var searchInput = $('.search_content_input');
+			var searchButton = $('.content_search');
+
+			searchButton.on('click', function(event)
+			{
+				event.stopPropagation();
+
+				if(!searchActive)
+				{
+					searchForm.addClass('active');
+					searchActive = true;
+
+					$(document).one('click', function closeForm(e)
+					{
+						if($(e.target).hasClass('search_content_input'))
+						{
+							$(document).one('click', closeForm);
+						}
+						else
+						{
+							searchForm.removeClass('active');
+							searchActive = false;
+						}
+					});
+				}
+				else
+				{
+					searchForm.removeClass('active');
+					searchActive = false;
+				}
+			});	
+		}
 	}
 });

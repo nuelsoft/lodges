@@ -7,7 +7,9 @@
 1. Vars and Inits
 2. Set Header
 3. Init Menu
-4. Initialize Milestones
+4. Init Stats
+5. Initialize Milestones
+6. Init Search Form
 
 
 ******************************/
@@ -22,9 +24,11 @@ $(document).ready(function()
 
 	*/
 
+	var menu = $('.menu');
 	var menuActive = false;
 	var header = $('.header');
 	var ctrl = new ScrollMagic.Controller();
+	var searchActive = false;
 
 	setHeader();
 
@@ -39,7 +43,9 @@ $(document).ready(function()
 	});
 
 	initMenu();
+	initStats();
 	initMilestones();
+	initSearchForm();
 
 	/* 
 
@@ -85,56 +91,119 @@ $(document).ready(function()
 
 	function initMenu()
 	{
-		if($('.menu').length)
+		if($('.hamburger').length && $('.menu').length)
 		{
-			var menu = $('.menu');
 			var hamb = $('.hamburger');
+			var close = $('.menu_close_container');
 
 			hamb.on('click', function()
 			{
-				if(menuActive)
+				if(!menuActive)
 				{
-					closeMenu();
+					openMenu();
 				}
 				else
 				{
-					openMenu();
-
-					$(document).one('click', function cls(e)
-					{
-						if($(e.target).hasClass('menu_mm'))
-						{
-							$(document).one('click', cls);
-						}
-						else
-						{
-							closeMenu();
-						}
-					});
+					closeMenu();
 				}
 			});
-		}
-	}
 
-	function closeMenu()
-	{
-		var menu = $('.menu');
-		menu.removeClass('active');
-		menuActive = false;
-		menu.css('max-height', "0px");
+			close.on('click', function()
+			{
+				if(!menuActive)
+				{
+					openMenu();
+				}
+				else
+				{
+					closeMenu();
+				}
+			});
+
+	
+		}
 	}
 
 	function openMenu()
 	{
-		var menu = $('.menu');
 		menu.addClass('active');
 		menuActive = true;
-		menu.css('max-height', menu.prop('scrollHeight') + "px");
+	}
+
+	function closeMenu()
+	{
+		menu.removeClass('active');
+		menuActive = false;
 	}
 
 	/* 
 
-	4. Initialize Milestones
+	4. Init Stats
+
+	*/
+
+	function initStats()
+	{
+		if($('.stats_item').length)
+		{
+			//Get all elements with .stats_item class
+			var statsItems = $('.stats_item');
+
+			//Go through each .stats_item
+			statsItems.each(function()
+			{
+				//Get .stats_bar that is inside the .stats_item
+				var item = $(this).find('.stats_bar');
+				//Get the element that is going to show the percentage in graph
+				var perc = item.find('.stats_bar_perc');
+				//Get the element that is going to show the percentage in number
+				var val = item.find('.stats_bar_value');
+				//Get the first value
+				var x = item.attr("data-x");
+				//Get the second value
+				var y = item.attr("data-y");
+				//Get the percentage bar color
+				var clr = item.attr("data-color");
+
+				//Get the percentage increase/decrease
+				var xPerc = Math.round(((y - x) / x) * 100);
+				//If it's a positive value
+				if(xPerc > 0)
+				{
+					var percBarWidth = xPerc;
+					if(xPerc > 100)
+					{
+						percBarWidth = 100;
+					}
+					perc.css('left', "50%");
+					perc.css('width', percBarWidth / 2 + "%");
+					val.text("+" + xPerc + "%");
+					val.css('left', "0");
+					val.css('text-align', "left");
+				}
+				//If it's a negative value
+				else
+				{
+					xPerc = Math.abs(xPerc);
+					var percBarWidth = xPerc;
+					if(xPerc > 100)
+					{
+						percBarWidth = 100;
+					}
+					perc.css('right', "50%");
+					perc.css('width', percBarWidth / 2 + "%");
+					val.text("-" + xPerc + "%");
+					val.css('right', "0");
+					val.css('text-align', "right");
+				}
+				perc.css('background', clr);
+			});
+		}
+	}
+
+	/* 
+
+	5. Initialize Milestones
 
 	*/
 
@@ -186,6 +255,51 @@ $(document).ready(function()
 		    	})
 			    .addTo(ctrl);
 	    	});
+		}
+	}
+
+	/* 
+
+	6. Init Search Form
+
+	*/
+
+	function initSearchForm()
+	{
+		if($('.search_form').length)
+		{
+			var searchForm = $('.search_form');
+			var searchInput = $('.search_content_input');
+			var searchButton = $('.content_search');
+
+			searchButton.on('click', function(event)
+			{
+				event.stopPropagation();
+
+				if(!searchActive)
+				{
+					searchForm.addClass('active');
+					searchActive = true;
+
+					$(document).one('click', function closeForm(e)
+					{
+						if($(e.target).hasClass('search_content_input'))
+						{
+							$(document).one('click', closeForm);
+						}
+						else
+						{
+							searchForm.removeClass('active');
+							searchActive = false;
+						}
+					});
+				}
+				else
+				{
+					searchForm.removeClass('active');
+					searchActive = false;
+				}
+			});	
 		}
 	}
 });

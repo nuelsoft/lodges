@@ -63,22 +63,22 @@
 
 @media only screen and (max-width: 1199px)
 {
-	.main_nav
+	.main_nav_container
 	{
-		margin-right: 56px;
+		margin-right: 121px;
 	}
-	.main_nav_item
+	.intro_image
 	{
-		margin-right: 33px;
+		position: relative;
+	    top: -13px;
 	}
-	.phone_home
+	.intro_image img
 	{
-		padding-left: 31px;
-    	padding-right: 29px;
+		width: 100%;
 	}
-	.phone_home span
+	.footer_blog_content
 	{
-		font-size: 14px;
+		padding-left: 74px;
 	}
 }
 
@@ -106,34 +106,31 @@
 
 @media only screen and (max-width: 991px)
 {
-	.main_nav
+	.main_nav_container
 	{
 		display: none;
 	}
-	.phone_home
-	{
-		display: none;
-	}
-	.logo span
-	{
-		font-size: 20px;
-	}
-	.logo img
-	{
-		width: 60px;
-	}
-	.hamburger_container
+	.hamburger
 	{
 		display: block;
 	}
+	.intro
+	{
+		padding-top: 71px;
+	}
 	.intro_image
 	{
-		padding-left: 0px;
-		padding-top: 0px;
+		position: relative;
+	    right: auto;
+	    top: auto;
 	}
-	.intro_title
+	.intro_content
 	{
-		margin-top: 50px;
+		margin-top: 30px;
+	}
+	.add_content
+	{
+		padding-left: 71px;
 	}
 	.milestone_col
 	{
@@ -143,34 +140,31 @@
 	{
 		margin-bottom: 0px;
 	}
-	.agent_col
+	.footer_column
 	{
 		margin-bottom: 60px;
 	}
-	.agent_col:last-child
+	.footer_column:last-child
 	{
 		margin-bottom: 0px;
 	}
-	.weekly_offer
+	.copyright
+	{
+		padding-top: 30px;
+		padding-bottom: 30px;
+	}
+	.copyright_content
+	{
+		height: auto;
+		margin-top: 15px;
+	}
+	.footer_nav_container
 	{
 		height: auto;
 	}
-	.weekly_offer_image
+	.footer_nav_item
 	{
-		position: relative;
-		top: auto;
-		left: auto;
-		width: 100%;
-		height: 220px;
-		margin-top: 80px;
-	}
-	.footer_col
-	{
-		margin-bottom: 60px;
-	}
-	.footer_col:last-child
-	{
-		margin-bottom: 0px;
+		display: block;
 	}
 }
 
@@ -198,7 +192,51 @@
 
 @media only screen and (max-width: 768px)
 {
-	
+	.home_title
+	{
+		font-size: 48px;
+	}
+	.stats_years
+	{
+		padding-left: 107px;
+	}
+	.stats_years_last
+	{
+		display: none !important;
+	}
+	.stats_years_new
+	{
+		float: left !important;
+	}
+	.stats_bar
+	{
+		width: 100%;
+	}
+	.stats_new
+	{
+		padding-right: 0px;
+	    padding-left: 40px;
+	    width: 40px;
+	    -webkit-transform: translateY(14px);
+	    -moz-transform: translateY(14px);
+	    -ms-transform: translateY(14px);
+	    -o-transform: translateY(14px);
+	    transform: translateY(15px);
+	}
+	.stats_new_icon
+	{
+		right: auto;
+	    left: 0;
+	    width: 40px;
+	}
+	.stats_new_content
+	{
+		margin-left: 10px;
+	}
+	.stats_last
+	{
+		display: none;
+	}
 }
 
 /************
@@ -207,10 +245,7 @@
 
 @media only screen and (max-width: 767px)
 {
-	.weekly_offer_image
-	{
-		height: 162px;
-	}
+	
 }
 
 /************
@@ -219,113 +254,156 @@
 
 @media only screen and (max-width: 575px)
 {
-	h2{font-size: 28px;}
-	h3{font-size: 20px;}
 	p{font-size: 13px;}
-	.header
+	h1{font-size: 28px;}
+	.top_bar
 	{
-		height: 80px;
-	}
-	.header_container
-	{
-		height: 80px;
-	}
-	.header.scrolled
-	{
-		height: 70px;
-	}
-	.header.scrolled .header_container
-	{
-		height: 70px;
-	}
-	.logo img
-	{
-		width: 36px;
-	}
-	.logo span
-	{
-		font-size: 12px;
-	}
-	.menu_item a
-	{
-		font-size: 14px;
-		line-height: 42px;
-	}
-	.home
-	{
-		height: 372px;
-	}
-	.home_content
-	{
-		margin-top: 205px;
-	}
-	.section_subtitle
-	{
-		font-size: 14px;
+		display: none;
 	}
 	.button
 	{
-		height: 41px;
+		height: 44px;
+		border-radius: 22px;
 	}
 	.button a
 	{
-	    font-size: 12px;
-	    line-height: 41px;
-	    padding-left: 27px;
-	    padding-right: 26px;
+		line-height: 44px;
+		padding-left: 36px;
+		padding-right: 36px;
+	}
+	.logo a img
+	{
+		width: 24px;
+	}
+	.logo a
+	{
+		font-size: 24px;
+	}
+	.main_nav_col
+	{
+		height: 60px;
+	}
+	.header.scrolled .main_nav_col
+	{
+		height: 60px;
+	}
+	.logo_container
+	{
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+		transform: none;
+	}
+	.content_search
+	{
+		-webkit-transform: translateY(2px);
+		-moz-transform: translateY(2px);
+		-ms-transform: translateY(2px);
+		-o-transform: translateY(2px);
+		transform: translateY(2px);
+	}
+	.header.scrolled .content_search
+	{
+		-webkit-transform: translateY(2px);
+		-moz-transform: translateY(2px);
+		-ms-transform: translateY(2px);
+		-o-transform: translateY(2px);
+		transform: translateY(2px);
+	}
+	.hamburger
+	{
+		-webkit-transform: none;
+		-moz-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+		transform: none;
+	}
+	.logo a
+	{
+		font-size: 16px;
+	}
+	.logo a img
+	{
+		width: 16px;
+		margin-right: 7px;
+	}
+	.hamburger i
+	{
+		font-size: 18px;
+	}
+	.content_search svg
+	{
+		width: 15px;
+		height: 15px;
+	}
+	.menu_close_container
+	{
+		top: 15px;
+		right: 28px;
+	}
+	.menu_logo
+	{
+		margin-bottom: 17px;
+	}
+	.menu_logo a img
+	{
+		width: 28px !important;
+	}
+	.menu_item a
+	{
+		font-size: 24px;
+	}
+	.section_title
+	{
+		font-size: 21px;
+	}
+	.home
+	{
+		width: 100%;
+		height: 375px;
+		background: transparent;
+	}
+	.home_title
+	{
+		font-size: 24px;
 	}
 	.intro_title
 	{
-		margin-top: 45px;
+		font-size: 21px;
 	}
 	.intro_text
 	{
-		margin-top: 29px;
+		margin-top: 45px;
 	}
-	.milestone_counter
+	.stats_text
 	{
-		font-size: 36px;
-		margin-top: 30px;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
-	.milestone_text
+	.stats_years
 	{
-		font-size: 12px;
-		margin-top: 10px;
+		float: none !important;
+		padding-left: 0px;
 	}
-	.newsletter_email
+	.stats_contents
 	{
-		height: 40px;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
-	.newsletter_submit_btn
+	.stats_number
 	{
-		height: 40px;
-		font-size: 12px;
+		font-size: 18px;
 	}
-	.weekly_offer_image
-	{
-		height: calc((100vw - 30px) / 3.13);
-		margin-top: 43px;
-	}
-	.weekly_offer_content
-	{
-		height: 40px;
-	}
-	.weekly_offer_icon
-	{
-		width: 54px;
-	}
-	.weekly_offer_icon img
-	{
-		width: 22px;
-	}
-	.weekly_offer_text
+	.stats_type
 	{
 		font-size: 12px;
-		line-height: 40px;
-		padding-left: 25px;
-		padding-right: 25px;
 	}
-	.useful_links_item a
+	.add_content
+	{
+		padding-left: 40px;
+	}
+	.footer_about_text
 	{
 		font-size: 13px;
 	}
@@ -356,9 +434,10 @@
 @media only screen and (max-width: 479px)
 {
 	h2{font-size: 24px;}
-	.intro_subtitle
+	p{font-size: 13px;}
+	.milestone_counter
 	{
-		font-size: 14px;
+		font-size: 36px;
 	}
 }
 
