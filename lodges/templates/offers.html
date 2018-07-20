@@ -49,13 +49,13 @@
 									<div class="offers_image_container">
 										<!-- Image by https://unsplash.com/@kensuarez -->
 										<div class="offers_image_background" style="background-image:url({% static 'images/offer_1.jpg' %})"></div>
-										<div class="offer_name"><a href="{% url 'listing' 0 %}">{{lodge.name}}</a></div>
+										<div class="offer_name"><a href="{% url 'listing' 0 %}">{{lodge.zone}}</a></div>
 									</div>
 								</div>
 								<div class="col-lg-8">
 									<div class="offers_content">
-										<div class="offers_price">N {{lodge.price}}<span> only</span></div>
-										<p class="offers_text"><h3 style="font-weight: bolder; color: #311245; font-family: ubuntu;">{{lodge.zone}}</h3>In a calm and serene environment. perfect for your jacking needs.</p>
+										<div class="offers_price">&#8358; {{lodge.price}}<span> only</span></div>
+										<p class="offers_text"><h3 style="font-weight: bolder; color: #311245; font-family: ubuntu;">{{lodge.name}}</h3>In a calm and serene environment. perfect for your jacking needs.</p>
 										<div class="offers_icons">
 											<ul class="offers_icons_list">
 												<li class="offers_icons_item"><img src="{% static 'images/post.png' %}" alt=""></li>
