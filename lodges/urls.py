@@ -7,6 +7,6 @@ urlpatterns = [
     path('blog', views.blog, name="blog"),
     path('elements', views.elements, name="elements"),
     path('about', views.about, name="about"),
-    path('single_listing', views.single_listing, name="single_listing"),
+    path('<int:lodge_id>/details', views.single_listing, name="listing"),
     path('offers', views.offers, name="offers"),
 ]

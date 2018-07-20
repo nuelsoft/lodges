@@ -37,7 +37,20 @@
 					<div class="home_slider_content text-center">
 						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
 							<h1>discover</h1>
-							<h1>the world</h1>
+							<h1>lodges around you today</h1>
+							<div class="button home_slider_button"><div class="button_bcg"></div><a href="{% url 'listing' 0 %}">see lodges<span></span><span></span><span></span></a></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Slider Item -->
+				<div class="owl-item home_slider_item">
+					<div class="home_slider_background" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
+
+					<div class="home_slider_content text-center">
+						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
+							<h1>only the best</h1>
+							<h1>for you</h1>
 							<div class="button home_slider_button"><div class="button_bcg"></div><a href="#">explore now<span></span><span></span><span></span></a></div>
 						</div>
 					</div>
@@ -49,21 +62,8 @@
 
 					<div class="home_slider_content text-center">
 						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
-							<h1>discover</h1>
-							<h1>the world</h1>
-							<div class="button home_slider_button"><div class="button_bcg"></div><a href="#">explore now<span></span><span></span><span></span></a></div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slider Item -->
-				<div class="owl-item home_slider_item">
-					<div class="home_slider_background" style="background-image:url({% static 'images/home_slider.jpg' %})"></div>
-
-					<div class="home_slider_content text-center">
-						<div class="home_slider_content_inner" data-animation-in="flipInX" data-animation-out="animate-out fadeOut">
-							<h1>discover</h1>
-							<h1>the world</h1>
+							<h1>get the best</h1>
+							<h1>lodges in town</h1>
 							<div class="button home_slider_button"><div class="button_bcg"></div><a href="#">explore now<span></span><span></span><span></span></a></div>
 						</div>
 					</div>
@@ -123,244 +123,7 @@
 
 	<!-- Search -->
 
-	<div class="search">
-
-
-		<!-- Search Contents -->
-
-		<div class="container fill_height">
-			<div class="row fill_height">
-				<div class="col fill_height">
-
-					<!-- Search Tabs -->
-
-					<div class="search_tabs_container">
-						<div class="search_tabs d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_tab active d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="{% static 'images/suitcase.png' %}" alt=""><span>lodge</span></div>
-							<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="{% static 'images/bus.png' %}" alt="">zone</div>
-							<div class="search_tab d-flex flex-row align-items-center justify-content-lg-center justify-content-start"><img src="{% static 'images/diving.png' %}" alt="">price</div>
-						</div>
-					</div>
-
-					<!-- Search Panel -->
-
-					<div class="search_panel active">
-						<form action="#" id="search_form_1" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_item">
-								<div>destination</div>
-								<input type="text" class="destination search_input" required="required">
-							</div>
-							<div class="search_item">
-								<div>check in</div>
-								<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>check out</div>
-								<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>adults</div>
-								<select name="adults" id="adults_1" class="dropdown_item_select search_input">
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<div class="search_item">
-								<div>children</div>
-								<select name="children" id="children_1" class="dropdown_item_select search_input">
-									<option>0</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button class="button search_button">search<span></span><span></span><span></span></button>
-						</form>
-					</div>
-
-					<!-- Search Panel -->
-
-					<div class="search_panel">
-						<form action="#" id="search_form_2" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_item">
-								<div>destination</div>
-								<input type="text" class="destination search_input" required="required">
-							</div>
-							<div class="search_item">
-								<div>check in</div>
-								<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>check out</div>
-								<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>adults</div>
-								<select name="adults" id="adults_2" class="dropdown_item_select search_input">
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<div class="search_item">
-								<div>children</div>
-								<select name="children" id="children_2" class="dropdown_item_select search_input">
-									<option>0</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button class="button search_button">search<span></span><span></span><span></span></button>
-						</form>
-					</div>
-
-					<!-- Search Panel -->
-
-					<div class="search_panel">
-						<form action="#" id="search_form_3" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_item">
-								<div>destination</div>
-								<input type="text" class="destination search_input" required="required">
-							</div>
-							<div class="search_item">
-								<div>check in</div>
-								<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>check out</div>
-								<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>adults</div>
-								<select name="adults" id="adults_3" class="dropdown_item_select search_input">
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<div class="search_item">
-								<div>children</div>
-								<select name="children" id="children_3" class="dropdown_item_select search_input">
-									<option>0</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button class="button search_button">search<span></span><span></span><span></span></button>
-						</form>
-					</div>
-
-					<!-- Search Panel -->
-
-					<div class="search_panel">
-						<form action="#" id="search_form_4" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_item">
-								<div>destination</div>
-								<input type="text" class="destination search_input" required="required">
-							</div>
-							<div class="search_item">
-								<div>check in</div>
-								<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>check out</div>
-								<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>adults</div>
-								<select name="adults" id="adults_4" class="dropdown_item_select search_input">
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<div class="search_item">
-								<div>children</div>
-								<select name="children" id="children_4" class="dropdown_item_select search_input">
-									<option>0</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button class="button search_button">search<span></span><span></span><span></span></button>
-						</form>
-					</div>
-
-					<!-- Search Panel -->
-
-					<div class="search_panel">
-						<form action="#" id="search_form_5" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_item">
-								<div>destination</div>
-								<input type="text" class="destination search_input" required="required">
-							</div>
-							<div class="search_item">
-								<div>check in</div>
-								<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>check out</div>
-								<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>adults</div>
-								<select name="adults" id="adults_5" class="dropdown_item_select search_input">
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<div class="search_item">
-								<div>children</div>
-								<select name="children" id="children_5" class="dropdown_item_select search_input">
-									<option>0</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button class="button search_button">search<span></span><span></span><span></span></button>
-						</form>
-					</div>
-
-					<!-- Search Panel -->
-
-					<div class="search_panel">
-						<form action="#" id="search_form_6" class="search_panel_content d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-lg-between justify-content-start">
-							<div class="search_item">
-								<div>destination</div>
-								<input type="text" class="destination search_input" required="required">
-							</div>
-							<div class="search_item">
-								<div>check in</div>
-								<input type="text" class="check_in search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>check out</div>
-								<input type="text" class="check_out search_input" placeholder="YYYY-MM-DD">
-							</div>
-							<div class="search_item">
-								<div>adults</div>
-								<select name="adults" id="adults_6" class="dropdown_item_select search_input">
-									<option>01</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<div class="search_item">
-								<div>children</div>
-								<select name="children" id="children_6" class="dropdown_item_select search_input">
-									<option>0</option>
-									<option>02</option>
-									<option>03</option>
-								</select>
-							</div>
-							<button class="button search_button">search<span></span><span></span><span></span></button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	{% include 'form.html' %}
 
 	<!-- Intro -->
 
@@ -368,31 +131,30 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h2 class="intro_title text-center">We have the best tours</h2>
+					<h2 class="intro_title text-center">Get the best lodge</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-10 offset-lg-1">
 					<div class="intro_text text-center">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eu convallis tortor. Suspendisse potenti. In faucibus massa arcu, vitae cursus mi hendrerit nec. </p>
+						<p>We work with only the best lodges around making sure we deliver excellent results. We also work around the clock to ensure you get every inch of value your money offers.</p>
 					</div>
 				</div>
 			</div>
 			<div class="row intro_items">
-
+				{% for z in zones %}
 				<!-- Intro Item -->
-
 				<div class="col-lg-4 intro_col">
 					<div class="intro_item">
 						<div class="intro_item_overlay"></div>
 						<!-- Image by https://unsplash.com/@dnevozhai -->
 						<div class="intro_item_background" style="background-image:url({% static 'images/intro_1.jpg' %})"></div>
 						<div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-							<div class="intro_date">May 25th - June 01st</div>
+							<div class="intro_date">{{z.count}} lodges available</div>
 							<div class="button intro_button"><div class="button_bcg"></div><a href="#">see more<span></span><span></span><span></span></a></div>
 							<div class="intro_center text-center">
-								<h1>Mauritius</h1>
-								<div class="intro_price">From $1450</div>
+								<h1>{{z.name}}</h1>
+								<div class="intro_price">From {{z.base_price}}</div>
 								<div class="rating rating_4">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
@@ -404,56 +166,7 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- Intro Item -->
-
-				<div class="col-lg-4 intro_col">
-					<div class="intro_item">
-						<div class="intro_item_overlay"></div>
-						<!-- Image by https://unsplash.com/@hellolightbulb -->
-						<div class="intro_item_background" style="background-image:url({% static 'images/intro_2.jpg' %})"></div>
-						<div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-							<div class="intro_date">May 25th - June 01st</div>
-							<div class="button intro_button"><div class="button_bcg"></div><a href="#">see more<span></span><span></span><span></span></a></div>
-							<div class="intro_center text-center">
-								<h1>Greece</h1>
-								<div class="intro_price">From $1450</div>
-								<div class="rating rating_4">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Intro Item -->
-
-				<div class="col-lg-4 intro_col">
-					<div class="intro_item">
-						<div class="intro_item_overlay"></div>
-						<!-- Image by https://unsplash.com/@willianjusten -->
-						<div class="intro_item_background" style="background-image:url({% static 'images/intro_3.jpg' %})"></div>
-						<div class="intro_item_content d-flex flex-column align-items-center justify-content-center">
-							<div class="intro_date">May 25th - June 01st</div>
-							<div class="button intro_button"><div class="button_bcg"></div><a href="#">see more<span></span><span></span><span></span></a></div>
-							<div class="intro_center text-center">
-								<h1>Scotland</h1>
-								<div class="intro_price">From $1450</div>
-								<div class="rating rating_4">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 
 			</div>
 		</div>

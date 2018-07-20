@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-from .models import UserProfile, Zone, Lodge
+from .models import Zone, Lodge
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 # Create your views here.
@@ -14,8 +14,14 @@ def contact(request):
 def elements(request):
     return render(request, 'elements.html')
 def index(request):
-    return render(request, 'index.html')
+    context = {
+        "zones": Zone.objects.all().order_by("name")[0:3],
+    }
+    return render(request, 'index.html', context)
 def offers(request):
-    return render(request, 'offers.html')
-def single_listing(request):
+    context = {
+        "lodges": Lodge.objects.all().order_by("name"),
+    }
+    return render(request, 'offers.html', context)
+def single_listing(request, lodge_id):
     return render(request, 'single_listing.html')
